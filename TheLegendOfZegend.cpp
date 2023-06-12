@@ -17,6 +17,7 @@ void play();
 
 int main()
 {
+    SetDllDirectory(L".\dll");
     Global::setConsole();
     Global::resizeWindow();
 
@@ -47,7 +48,7 @@ int main()
             Global::finishFrame();
         }
         else {
-            PlaySound(L"Sound/SND_Key.wav", NULL, SND_ASYNC);
+            PlaySound(L"./Sound/SND_Key.wav", NULL, SND_ASYNC);
             while (alternate > -fps) {
                 setWindowCursorPos(7, windowHeight);
                 std::cout << "\033[0mPRESS SPACE TO PLAY";
@@ -85,7 +86,7 @@ void play() {
     Player* p = new Player(xPos, yPos, &objectMap);
 
     ///////////////////////////////////////////////////////////////////////Boot game window
-    PlaySound(L"Sound/BGM.wav", NULL, SND_ASYNC | SND_LOOP);
+    PlaySound(L"./Sound/BGM.wav", NULL, SND_ASYNC | SND_LOOP);
 
     xWindowStart = p->getX() - xWindowCenter; 
     xWindowEnd = p->getX() + xWindowCenter + 1; //Initial set of the window location
