@@ -1,4 +1,5 @@
 #include "GlobalCalls.h"
+#include <Windows.h>
 #include <thread>
 #include <iostream>
 #include "Constants.h"
@@ -24,4 +25,23 @@ void Global::resizeWindow() {
         << "\033[8;"
         << (windowHeight + 3) << ";"
         << (windowWidth) << "t";
+}
+void Global::setConsole() {
+
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    DWORD dwMode = 0;
+    GetConsoleMode(handle, &dwMode);
+    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    SetConsoleMode(handle, dwMode);
+
+    CONSOLE_FONT_INFOEX fontInfo;
+    fontInfo.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+    GetCurrentConsoleFontEx(handle, FALSE, &fontInfo);
+
+    fontInfo.dwFontSize.X = 0;
+    fontInfo.dwFontSize.Y = 32;
+    wcscpy_s(fontInfo.FaceName, L"Lucida Console");
+
+    SetCurrentConsoleFontEx(handle, FALSE, &fontInfo);
 }

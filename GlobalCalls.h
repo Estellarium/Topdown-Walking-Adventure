@@ -9,4 +9,5 @@ public:
     static void startFrame();
     static void finishFrame();
     static void resizeWindow();
+    static void setConsole();
 };

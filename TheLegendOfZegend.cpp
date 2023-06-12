@@ -17,6 +17,7 @@ void play();
 
 int main()
 {
+    Global::setConsole();
     Global::resizeWindow();
 
     for (int i = 0; i < (sizeof(MainMenu) / sizeof(MainMenu[0])); i++) {
